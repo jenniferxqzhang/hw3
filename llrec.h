@@ -86,18 +86,17 @@ Node* llfilter(Node* head, Comp pred)
 
     // base case: if the list is empty, return
     if(head == nullptr){
-        return head;
+        return nullptr;
     }
+
+    Node* next = head -> next;
 
     // if the value of the node needs to be removed:
     if(pred(head->val)){
         // use a temporary variable so you do not lose the head
-        Node* temp = head;
-        head = head->next;
-        delete temp; // make sure you delete temp after you adjust head
-        head->next = llfilter(head, pred);
-        return head;
-
+        delete head; 
+        return llfilter(next, pred);
+        
     }
     // the node does not need to be removed:
     else{
